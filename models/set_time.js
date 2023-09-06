@@ -1,7 +1,5 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class set_time extends Model {
     /**
@@ -14,46 +12,48 @@ module.exports = (sequelize, DataTypes) => {
     }
   }
 
-  
-  set_time.init({
-    // set_time_id: DataTypes.INTEGER,
-    // event_id: DataTypes.INTEGER,
-    // stage_id: DataTypes.INTEGER,
-    // band_id: DataTypes.INTEGER,
-    // start_time: DataTypes.DATE,
-    // end_time: DataTypes.DATE
+  set_time.init(
+    {
+      // set_time_id: DataTypes.INTEGER,
+      // event_id: DataTypes.INTEGER,
+      // stage_id: DataTypes.INTEGER,
+      // band_id: DataTypes.INTEGER,
+      // start_time: DataTypes.DATE,
+      // end_time: DataTypes.DATE
 
-    set_time_id: {
-      type: DataTypes.INTEGER,
+      set_time_id: {
+        type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-    },
+      },
 
-    event_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false
+      event_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      stage_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      band_id: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
+      start_time: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      end_time: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
     },
-    stage_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    band_id: {
-      type: DataTypes.INTEGER,
-      allowNull: false
-    },
-    start_time: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
-    end_time: {
-      type: DataTypes.DATE,
-      allowNull: false
-    },
- 
-  }, {
-    modelName: "set_time",
-    tableName: "set_times",
-    timestamps: false,
-  });
+    {
+      sequelize,
+      modelName: "set_time",
+      tableName: "set_times",
+      timestamps: false,
+    }
+  );
   return set_time;
 };
