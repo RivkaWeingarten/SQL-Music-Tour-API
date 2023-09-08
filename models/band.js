@@ -1,58 +1,64 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class Band extends Model {
-    /**
-     * Helper method for defining associations.
-     * This method is not a part of Sequelize lifecycle.
-     * The `models/index` file will call this method automatically.
-     */
-    static associate(models) {
-      // define association here
+    static associate({ MeetGreet, SetTime}) {
+      // meet and greets
+      Band.hasMany(MeetGreet, {
+        foreignKey: "band_id",
+        as: "meet_greets",
+      });
+
+      // set times
+      Band.hasMany(SetTime, {
+        foreignKey: "band_id",
+        as: "set_times",
+      });
     }
   }
   //This is what sequelize generated
-//   Band.init({
-//     band_id: DataTypes.INTEGER,
-//     name: DataTypes.STRING,
-//     genre: DataTypes.TEXT,
-//     available_start_time: DataTypes.DATE,
-//     end_time: DataTypes.DATE
-//   }, {
-//     sequelize,
-//     modelName: 'Band',
-//   });
-//This is what was taken from the exercize
-Band.init({
-    band_id: {
-      type: DataTypes.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
-    name: {
+  //   Band.init({
+  //     band_id: DataTypes.INTEGER,
+  //     name: DataTypes.STRING,
+  //     genre: DataTypes.TEXT,
+  //     available_start_time: DataTypes.DATE,
+  //     end_time: DataTypes.DATE
+  //   }, {
+  //     sequelize,
+  //     modelName: 'Band',
+  //   });
+  //This is what was taken from the exercize
+  Band.init(
+    {
+      band_id: {
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      name: {
         type: DataTypes.STRING,
-        allowNull: false
-    },
-    genre: {
+        allowNull: false,
+      },
+      genre: {
         type: DataTypes.TEXT,
-        allowNull: false
-    },
-    available_start_time: {
+        allowNull: false,
+      },
+      available_start_time: {
         type: DataTypes.DATE,
-        allowNull: false
-    },
-    end_time: {
+        allowNull: false,
+      },
+      end_time: {
         type: DataTypes.DATE,
-        allowNull: false
+        allowNull: false,
+      },
+    },
+    {
+      sequelize,
+      modelName: "Band",
+      tableName: "bands",
+      timestamps: false,
     }
-  }, {
-    sequelize,
-    modelName: 'Band',
-    tableName: 'bands',
-    timestamps: false
-  })
+  );
 
   return Band;
 };
