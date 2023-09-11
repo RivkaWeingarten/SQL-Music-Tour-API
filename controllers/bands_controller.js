@@ -31,10 +31,11 @@ bands.get("/:name", async (req, res) => {
           include: {
             model: Event,
             as: "event",
+              //this where clause doesnt work. my code works when this is commented out.
             where: {
               name: {
                 [Op.iLike]: `%${
-                  req.query.event ? req.query.event : ""
+                  req.query.event.name ? req.query.event.name : ""
                 }%`,
               },
             },
@@ -46,10 +47,12 @@ bands.get("/:name", async (req, res) => {
           include: {
             model: Event,
             as: "event",
+
+            //this where clause doesnt work. my code works when this is commented out.
             where: {
               name: {
                 [Op.iLike]: `%${
-                  req.query.event ? req.query.event : ""
+                  req.query.event.name ? req.query.event.name : ""
                 }%`,
               },
             },
@@ -57,10 +60,7 @@ bands.get("/:name", async (req, res) => {
         },
       ],
     });
-    // const sequelize = new sequelize("music_tour", "postgres", "Curtains555", {
-    //     // Other options...
-    //     logging: console.log, // Log SQL queries to the console
-    //   });
+   
     res.status(200).json(foundBand);
   } catch (error) {
     res.status(500).json(error);
